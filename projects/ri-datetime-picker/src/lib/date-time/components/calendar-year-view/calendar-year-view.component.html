@@ -1,0 +1,16 @@
+<table class="ri-dt-calendar-table ri-dt-calendar-year-table">
+    <thead class="ri-dt-calendar-header">
+    <tr>
+        <th class="ri-dt-calendar-table-divider" aria-hidden="true" colspan="4"></th>
+    </tr>
+    </thead>
+    <tbody ri-date-time-calendar-body role="grid"
+           [rows]="months" [numCols]="4" [cellRatio]="4 / 6"
+           [activeCell]="activeCell"
+           [todayValue]="todayMonth"
+           [selectedValues]="selectedMonths"
+           [selectMode]="selectMode"
+           (keydown)="handleCalendarKeydown($event)"
+           (select)="selectCalendarCell($event)">
+    </tbody>
+</table>

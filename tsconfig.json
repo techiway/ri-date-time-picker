@@ -4,10 +4,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -16,6 +17,14 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "ri-datetime-picker": [
+        "dist/ri-datetime-picker"
+      ], 
+      "ri-datetime-picker/*": [
+        "dist/ri-datetime-picker/*"
+      ]
+    },
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,

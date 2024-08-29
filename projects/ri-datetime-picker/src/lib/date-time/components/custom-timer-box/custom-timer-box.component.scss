@@ -1,0 +1,62 @@
+.time-column {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    // margin: 20px auto;
+    border: 1px solid #ddd;
+    // padding: 10px;
+    position: relative;
+    height: 18em;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    border-radius: 20px;
+        .time-input {
+            text-align: center;
+            margin-bottom: -2px;
+            padding: 5px;
+            color: #4c4c4c;
+            border: 1px solid #ddd8d8;
+        }
+
+        input:focus {
+            border: 1px solid #ddd8d8;
+        }
+  }
+
+  .time-column::-webkit-scrollbar {
+    width: 5px;
+  }
+  .time-column::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+  .time-column div {
+    padding: 5px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    color: #212529;
+    &:hover {
+      background-color: #1d80dd;
+      color: #fff;
+    }
+
+    &.selected {
+      background-color: #3f51b5;
+      color: #fff;
+    }
+  }
+  
+  .time-column div:last-child {
+    border-bottom: none;
+  }
+
+  .cursor-ptr {
+    cursor: pointer;
+  }
+
+  .pis-30 {
+    padding-inline-start: 30px;
+  }
+  

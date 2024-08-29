@@ -1,0 +1,28 @@
+<tr *ngFor="let row of rows; let rowIndex = index" role="row">
+    <td *ngFor="let item of row; let colIndex = index"
+        class="ri-dt-calendar-cell {{item.cellClass}}"
+        [tabindex]="isActiveCell(rowIndex, colIndex) ? 0 : -1"
+        [class.ri-dt-calendar-cell-active]="isActiveCell(rowIndex, colIndex)"
+        [class.ri-dt-calendar-cell-disabled]="!item.enabled"
+        [class.ri-dt-calendar-cell-in-range]="isInRange(item.value)"
+        [class.ri-dt-calendar-cell-range-from]="isRangeFrom(item.value)"
+        [class.ri-dt-calendar-cell-range-to]="isRangeTo(item.value)"
+        [attr.aria-label]="item.ariaLabel"
+        [attr.aria-disabled]="!item.enabled || null"
+        [attr.aria-current]="item.value === todayValue ? 'date' : null"
+        [attr.aria-selected]="isSelected(item.value)"
+        [style.width.%]="100 / numCols"
+        [style.paddingTop.%]="50 * cellRatio / numCols"
+        [style.paddingBottom.%]="50 * cellRatio / numCols"
+        (click)="selectCell(item)">
+        <span class="ri-dt-calendar-cell-content"
+              [ngClass]="{
+                'ri-dt-calendar-cell-out': item.out,
+                'ri-dt-calendar-cell-today': item.value === todayValue,
+                'ri-dt-calendar-cell-selected': isSelected(item.value)
+              }"
+              >
+            {{item.displayValue}}
+        </span>
+    </td>
+</tr>

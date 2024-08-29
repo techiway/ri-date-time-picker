@@ -1,0 +1,110 @@
+<div [cdkTrapFocus]="picker.pickerMode !== 'inline'"
+     [@fadeInPicker]="picker.pickerMode === 'inline'? '' : 'enter'"
+     class="ri-dt-container-inner" [ngClass]="{'timer-container': pickerType === 'timer'}">
+
+<div class="ri-dt-calendar-time-container ">
+    <ri-date-time-calendar
+    *ngIf="pickerType === 'both' || pickerType === 'calendar'"
+    class="ri-dt-container-row calendar-div"
+    [firstDayOfWeek]="picker.firstDayOfWeek"
+    [(pickerMoment)]="pickerMoment"
+    [selected]="picker.selected"
+    [selecteds]="picker.selecteds"
+    [selectMode]="picker.selectMode"
+    [minDate]="picker.minDateTime"
+    [maxDate]="picker.maxDateTime"
+    [dateFilter]="picker.dateTimeFilter"
+    [startView]="picker.startView"
+    [yearOnly]="picker.yearOnly"
+    [showCalendarWeeks]="picker.showCalendarWeeks"
+    [multiyearOnly]="picker.multiyearOnly"
+    [hideOtherMonths]="picker.hideOtherMonths"
+    (yearSelected)="picker.selectYear($event)"
+    (monthSelected)="picker.selectMonth($event)"
+    (dateClicked)="picker.selectDate($event)"
+    (selectedChange)="dateSelected($event)"></ri-date-time-calendar>
+
+<ri-date-time-timer
+    *ngIf="pickerType === 'both' || pickerType === 'timer'"
+    class="ri-dt-container-column timer-div"
+    [pickerMoment]="pickerMoment"
+    [minDateTime]="picker.minDateTime"
+    [maxDateTime]="picker.maxDateTime"
+    [showSecondsTimer]="picker.showSecondsTimer"
+    [hour12Timer]="picker.hour12Timer"
+    [stepHour]="picker.stepHour"
+    [stepMinute]="picker.stepMinute"
+    [stepSecond]="picker.stepSecond"
+    (selectedChange)="timeSelected($event)"></ri-date-time-timer>
+
+</div>
+   
+   
+    <div *ngIf="picker.isInRangeMode"
+         role="radiogroup"
+         class="ri-dt-container-info ri-dt-container-row">
+        <div role="radio" [tabindex]="activeSelectedIndex === 0 ? 0 : -1"
+             [attr.aria-checked]="activeSelectedIndex === 0"
+             class="ri-dt-control ri-dt-container-range ri-dt-container-from"
+             [ngClass]="{'ri-dt-container-info-active': activeSelectedIndex === 0}"
+             (click)="handleClickOnInfoGroup($event, 0)"
+             (keydown)="handleKeydownOnInfoGroup($event, to, 0)" #from>
+            <span class="ri-dt-control-content ri-dt-container-range-content" tabindex="-1">
+                <span class="ri-dt-container-info-label">{{fromLabel}}:</span>
+                <span class="ri-dt-container-info-value">{{fromFormattedValue}}</span>
+            </span>
+        </div>
+        <div role="radio" [tabindex]="activeSelectedIndex === 1 ? 0 : -1"
+             [attr.aria-checked]="activeSelectedIndex === 1"
+             class="ri-dt-control ri-dt-container-range ri-dt-container-to"
+             [ngClass]="{'ri-dt-container-info-active': activeSelectedIndex === 1}"
+             (click)="handleClickOnInfoGroup($event, 1)"
+             (keydown)="handleKeydownOnInfoGroup($event, from, 1)" #to>
+            <span class="ri-dt-control-content ri-dt-container-range-content" tabindex="-1">
+                <span class="ri-dt-container-info-label">{{toLabel}}:</span>
+                <span class="ri-dt-container-info-value">{{toFormattedValue}}</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="showControlButtons" class="ri-dt-container-buttons ri-dt-container-row">
+        <button class="ri-dt-control ri-dt-control-button ri-dt-container-control-button"
+                type="button" tabindex="0"
+                (click)="onCancelClicked($event)">
+            <span class="ri-dt-control-content ri-dt-control-button-content" tabindex="-1">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <path d="M24.4 7.613c-0.52-0.52-1.36-0.52-1.88 0l-6.52 6.507-6.52-6.52c-0.52-0.52-1.36-0.52-1.88 0s-0.52 1.36 0 1.88l6.52 6.52-6.52 6.52c-0.52 0.52-0.52 1.36 0 1.88s1.36 0.52 1.88 0l6.52-6.52 6.52 6.52c0.52 0.52 1.36 0.52 1.88 0s0.52-1.36 0-1.88l-6.52-6.52 6.52-6.52c0.507-0.507 0.507-1.36 0-1.867z"></path>
+                </svg>
+            </span>
+        </button>
+        <button class="ri-dt-control ri-dt-control-button ri-dt-container-control-button"
+                type="button" tabindex="0"
+                (click)="onSetClicked($event)">
+            <span class="ri-dt-control-content ri-dt-control-button-content" tabindex="-1">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <path d="M28 9.333l-16 16-7.333-7.333 1.88-1.88 5.453 5.44 14.12-14.107 1.88 1.88z"></path>
+                </svg>
+            </span>
+        </button>
+    </div> -->
+    <div *ngIf="showControlButtons" class="button-container">
+        <button class="icon-button"
+        type="button" tabindex="0" 
+        (click)="onCancelClicked($event)">
+        <span class="" tabindex="-1">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="#6C757D">
+                <path d="M24.4 7.613c-0.52-0.52-1.36-0.52-1.88 0l-6.52 6.507-6.52-6.52c-0.52-0.52-1.36-0.52-1.88 0s-0.52 1.36 0 1.88l6.52 6.52-6.52 6.52c-0.52 0.52-0.52 1.36 0 1.88s1.36 0.52 1.88 0l6.52-6.52 6.52 6.52c0.52 0.52 1.36 0.52 1.88 0s0.52-1.36 0-1.88l-6.52-6.52 6.52-6.52c0.507-0.507 0.507-1.36 0-1.867z"></path>
+            </svg>
+        </span>
+    </button>
+    <button class="icon-button" 
+            type="button" tabindex="0"
+            (click)="onSetClicked($event)">
+        <span class="" tabindex="-1">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="#3f51b5">
+                <path d="M28 9.333l-16 16-7.333-7.333 1.88-1.88 5.453 5.44 14.12-14.107 1.88 1.88z"></path>
+            </svg>
+        </span>
+    </button>
+    </div>
+</div>

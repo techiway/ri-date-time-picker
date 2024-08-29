@@ -3,5 +3,38 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ri-datetime-picker": {
+      "projectType": "library",
+      "root": "projects/ri-datetime-picker",
+      "sourceRoot": "projects/ri-datetime-picker/src",
+      "prefix": "ri",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ri-datetime-picker/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ri-datetime-picker/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ri-datetime-picker/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ri-datetime-picker/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
   }
 }

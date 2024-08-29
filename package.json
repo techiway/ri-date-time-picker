@@ -6,23 +6,32 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build_css_onLinux": "mkdir -p dist/ri-datetime-picker/assets/style && sass --style=compressed projects/ri-datetime-picker/src/styles/date-picker.scss > dist/ri-datetime-picker/assets/style/picker1.min.css",
+    "build-library": "ng build --configuration production",
+    "pack-lib": "cd dist/ri-datetime-picker && npm pack",
+    "pack-library": "npm run build-library && npm run build_css_onLinux && npm run pack-lib"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.1.0",
+    "@angular/cdk": "~16.2.14",
     "@angular/common": "^16.1.0",
     "@angular/compiler": "^16.1.0",
     "@angular/core": "^16.1.0",
     "@angular/forms": "^16.1.0",
+    "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^16.1.8",
     "@angular/cli": "~16.1.6",
     "@angular/compiler-cli": "^16.1.0",
     "@types/jasmine": "~4.3.0",
@@ -32,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^16.0.0",
     "typescript": "~5.1.3"
   }
 }
